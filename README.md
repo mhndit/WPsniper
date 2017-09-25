@@ -1,14 +1,15 @@
 # WPsniper
-Tool for Finding PHP Shells on wordpress uploaded by Hacker
+Tool for Finding PHP Shells on wordpress uploaded by Hacker </br>
 
-Usage   : wpsniper.py http:// [ Target domain ] / [ wordpress directory ] 
+Usage   : wpsniper.py http:// [ Target domain ] / [ wordpress directory ]  </br>
 Example : wpsniper.py http://example/blog/
 
 
 
-Requirements : 
+Requirements : </br>
+pip install httplib </br>
+pip install urllib </br>
+pip install requests </br>
+pip install BeautifulSoup </br>
 
-pip install httplib
-pip install urllib
-pip install requests
-pip install BeautifulSoup
+@mhnd_it
