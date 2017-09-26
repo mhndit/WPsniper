@@ -6,10 +6,14 @@ Example : wpsniper.py http://example/blog/
 
 
 
-Requirements : </br>
+<h2> Requirements : </h2> </br>
+pip install BeautifulSoup </br>
+pip install bs4 </br>
+pip install lxml </br>
 pip install httplib </br>
 pip install urllib </br>
 pip install requests </br>
 pip install BeautifulSoup </br>
+
 
 @mhnd_it
