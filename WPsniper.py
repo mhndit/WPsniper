@@ -1,32 +1,36 @@
-# @mhnd_it #
-import requests,re,httplib,sys,os,urllib
+# penetration testing tool for Finding Shells uploded 
+# GitHub : mhndit
+# Twitter : mhnd_it
+
+import requests,re,httplib,sys,os,urllib,datetime
 from bs4 import BeautifulSoup
-from urlparse import urlparse
+from datetime import date
+from dateutil.rrule import rrule, MONTHLY
 
-print '''
-|===================================================|
-[+]  WPSniper v 1.0
-[+]  Tool for Finding PHP Shells on wordpress uploaded by Hacker 
-[+]  By Mohannad alOtaibi
-[+]  Twitter : @ mhnd_it
-[+]  GitHub  : Mhndit
-|===================================================|\n
-'''
+Optins = """
 
-if len(sys.argv)<2:
-    print "Usage   : wpsniper.py http:// [ Target domain ] / [ wordpress directory ] "
-    print "Example : wpsniper.py http://example/blog/"
-    sys.exit(1)
-	
-Tar = sys.argv[1]
-TotalShels = ""
+ __        ______            _                 
+ \ \      / /  _ \ ___ _ __ (_)_ __   ___ _ __ 
+  \ \ /\ / /| |_) / __| '_ \| | '_ \ / _ \ '__|
+   \ V  V / |  __/\__ \ | | | | |_) |  __/ |   
+    \_/\_/  |_|   |___/_| |_|_| .__/ \___|_|   
+                              |_|              
+							  
+[+]  WPsniper v 2.0
+[+]  wordpress Tool for Finding PHP Shells Or Malicious files 
+[+]  This script was written By Mohannad alOtaibi , Twitter : mhnd_it
+-----------------------------------------------------------------------
+"""
 
 def UrlTest(url):
-	urlOpen = urllib.urlopen(url)
-	UrlCheck = urlOpen.getcode()
-	if UrlCheck != 404:
-		return True
-	else :
+	try:
+		urlOpen = urllib.urlopen(url)
+		UrlCheck = urlOpen.getcode()
+		if UrlCheck != 404:
+			return True
+		else :
+			return False
+	except:
 		return False
 
 def MhndIt(url):
@@ -36,35 +40,52 @@ def MhndIt(url):
         hrefs.append(a['href'])
     return hrefs
 
-if UrlTest(Tar) == True :
-	print "\n [ + ] connected ! ...."
-	fp = open('WpSniper.txt')
-	out = fp.read().split("\n")
-	for line in out:
-		if UrlTest(Tar+line) == True :
-			DirList1 = MhndIt(Tar+line)
-			for link in DirList1:
-				xphp = ['.php','.php3','.phtml']
-				for pattern in xphp:
-					if re.search(pattern,  link):
-						TotalShels+=  " [+] " + Tar + line +link +" \n"
-						sys.stdout.write(  " [+] " + Tar + line +link +" \n")
-						file = open('result.txt','a')
-						file.write("\n [+] " + Tar + line +link)
-						sys.stdout.write('\r')
-						file.close()
-					else :
-						sys.stdout.write('\r'+"-[ Not in search "+line+" ]")
-						sys.stdout.write('\r')
-		else :
-			sys.stdout.write('\r'+" [ Scaning ... "+line+" ]")
-			sys.stdout.write('\r')
-	fp.close()
-	sys.stdout.write('\r')
-	print "\n\n [ Total files found are : ] "
-	print TotalShels
-	print "\n + You will find it here : result.txt" 
-else :
-	print "\b  [ - ] The link is incorrect -> " + Tar + "\n"
+def WPsniper(Tar):
+	global a,b
+	global TotalShels
+	if UrlTest(Tar) == True :
+		print("[+] Has Been connected ! ....")
+		print("[+] will be start from : "+str(a)+" Until :"+ str(b))
+		file = open('result.txt','a')
+		file.write(Optins)
+		for dt in rrule(MONTHLY, dtstart=a, until=b):
+			line =  Tar + "/wp-content/uploads/"+dt.strftime("%Y/%m/")
+			dir = "/wp-content/uploads/"+dt.strftime("%Y/%m/")
+			if UrlTest(line) == True :
+				DirList1 = MhndIt(line)
+				for link in DirList1:
+					xphp = ['.php','.php3','.phtml']
+					for pattern in xphp:
+						if re.search(pattern,  link):
+							TotalShels+=  "[+] " + line + link+" \n"
+							print("[+] " + line + link+" ")
+							file = open('result.txt','a')
+							file.write(line + link+" \n")
+							file.close()
+						#else :
+							#print("[-] "+dir+" "+link+"]")
+			else :
+				print("[*] Scaning ... "+line+" ")
+				
+		print("[+] Done !")
+		return True
+	else :
+		print("[-] website dose't Work ! " + Tar + "\n")
+
+print Optins
+
+if len(sys.argv) == 3 :
+	wp_web = sys.argv[1]
+	wp_Date = sys.argv[2]
+	x = datetime.datetime.now()
+	a = date(int(wp_Date), 1, 1)
+	b = date(x.year, x.month, x.day)
+	TotalShels = ""
 	
-# @mhnd_it #
+	if WPsniper(wp_web) == True :
+		print("\n[ Total files found are : ] ")
+		print TotalShels
+		print("[ You will find it here : result.txt ]") 
+else:
+	print("Usege 	: WPsniper.py [ Target ] [ From Year ] ")
+	print("Example  : WPsniper.py http://example.com/wp 2017 ")
