@@ -1,19 +1,17 @@
-# WPsniper
-Tool for Finding PHP Shells on wordpress uploaded by Hacker </br>
+# WPsniper v2
 
-Usage   : wpsniper.py http:// [ Target domain ] / [ wordpress directory ]  </br>
-Example : wpsniper.py http://example/blog/
-
-
-
-<h2> Requirements : </h2> </br>
-pip install BeautifulSoup </br>
-pip install bs4 </br>
-pip install lxml </br>
-pip install httplib </br>
-pip install urllib </br>
-pip install requests </br>
-pip install BeautifulSoup </br>
+ __        ______            _                 
+ \ \      / /  _ \ ___ _ __ (_)_ __   ___ _ __ 
+  \ \ /\ / /| |_) / __| '_ \| | '_ \ / _ \ '__|
+   \ V  V / |  __/\__ \ | | | | |_) |  __/ |   
+    \_/\_/  |_|   |___/_| |_|_| .__/ \___|_|   
+                              |_|              			  
+[+]  WPsniper v 2.0
+[+]  wordpress Tool for Finding PHP Shells Or Malicious files 
+[+]  This script was written By Mohannad alOtaibi , Twitter : mhnd_it
+-----------------------------------------------------------------------
+Usege 	: WPsniper.py [ Target ] [ From Year ] 
+Example  : WPsniper.py http://example.com/wp 2017 
 
 
-@mhnd_it
+
